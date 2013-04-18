@@ -1,0 +1,12 @@
+{
+  "name": "bobun-ui",
+  "description": "UI library using Backbone and Bootstrap.",
+  "version": "0.0.1",
+  "author": "Bergé Greg <berge.greg@gmail.com>",
+  "devDependencies": {
+    "backbone": "~1.0.0",
+    "underscore": "~1.4.4",
+    "jquery": "~1.9.1",
+    "bootstrap.css": "~2.1.1"
+  }
+}
