@@ -4,7 +4,7 @@
   context.Bobun = context.Bobun || {};
   context.Bobun.UI = context.Bobun.UI || {};
 
-  window.Bobun.UI.Base = window.Backbone.View.extend({
+  context.Bobun.UI.Base = context.Backbone.View.extend({
     append: function (view) {
       this.$el.append(view.render().el);
       view.delegateEvents();
