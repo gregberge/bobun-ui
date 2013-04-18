@@ -9,6 +9,7 @@
     "ui"
   ],
   "scripts": {
+    "install": "bower install",
     "test": "grunt test:single"
   },
   "devDependencies": {
