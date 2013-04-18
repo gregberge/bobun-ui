@@ -9,7 +9,7 @@
     "ui"
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "grunt test:single"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
