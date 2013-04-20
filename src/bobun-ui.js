@@ -10,6 +10,8 @@
       context.Backbone.View.prototype._configure.apply(this, arguments);
 
       this.views = this.options.views || {};
+
+      _.each(this.options, this._bindModelOption, this);
     },
 
     append: function (view) {
@@ -33,13 +35,13 @@
       return this.options[option];
     },
 
-    bindOption: function (option, model) {
+    _bindModelOption: function (option, model) {
       var optionValue, optionMatches;
 
       model = model || this.model;
       optionValue = this.options[option];
 
-      if (! model || ! option) {
+      if (! model || ! option || typeof optionValue !== 'string') {
         return ;
       }
 
@@ -49,11 +51,18 @@
         return ;
       }
 
-      this.listenTo(model, 'change:' + optionMatches[1], function (model, value) {
-        this.set(option, value);
+      this.bindChange(optionMatches[1], this, model, option);
+    },
+
+    bindChange: function (originOption, target, origin, targetOption) {
+      origin = origin || this;
+      targetOption = targetOption || originOption;
+
+      this.listenTo(origin, 'change:' + originOption, function (origin, value) {
+        target.set(targetOption, value);
       });
 
-      this.set(option, model.get(optionMatches[1]), {silent: true});
+      target.set(targetOption, origin.get(originOption), {silent: true});
     },
 
     _$trigger: function (event) {

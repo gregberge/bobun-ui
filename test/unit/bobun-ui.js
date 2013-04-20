@@ -99,7 +99,23 @@ describe('Bobun.UI', function () {
       });
     });
 
-    describe('#bindOption', function () {
+    describe('#bindChange', function () {
+
+      it('should bind a change event to an object', function () {
+        var spy = sinon.spy(),
+        model = new Backbone.Model();
+
+        model.on('change:foo', spy);
+        baseView.bindChange('foo', model);
+
+        baseView.set('foo', 'bar');
+
+        expect(spy.called).to.be.true;
+        expect(model.get('foo')).to.equal('bar');
+      });
+    });
+
+    describe('#_bindModelOption', function () {
 
       beforeEach(function () {
         baseView.model = new Backbone.Model({
@@ -112,7 +128,7 @@ describe('Bobun.UI', function () {
       });
 
       it('should set the model attribute to the option', function () {
-        baseView.bindOption('foo');
+        baseView._bindModelOption('foo');
         expect(baseView.get('foo'), 'hello');
       });
 
@@ -121,7 +137,7 @@ describe('Bobun.UI', function () {
         baseView.on('change:foo', spy);
         baseView.on('change', spy);
 
-        baseView.bindOption('foo');
+        baseView._bindModelOption('foo');
         expect(baseView.get('foo'), 'hello');
 
         expect(spy.called).to.be.false;
@@ -130,7 +146,7 @@ describe('Bobun.UI', function () {
       it('should listen change on the model', function () {
         var spy = sinon.spy();
 
-        baseView.bindOption('foo');
+        baseView._bindModelOption('foo');
 
         baseView.on('change:foo', spy);
 
