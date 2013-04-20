@@ -24,6 +24,29 @@
 
     get: function (option) {
       return this.options[option];
+    },
+
+    _bindOption: function (option, model) {
+      var optionValue, optionMatches;
+
+      model = model || this.model;
+      optionValue = this.options[option];
+
+      if (! model || ! option) {
+        return ;
+      }
+
+      optionMatches = optionValue.match(/model\.(.*)/);
+
+      if (! optionMatches) {
+        return ;
+      }
+
+      this.listenTo(model, 'change:' + optionMatches[1], function (model, value) {
+        this.set(option, value);
+      });
+
+      this.set(option, model.get(optionMatches[1]), {silent: true});
     }
   });
 }(window));

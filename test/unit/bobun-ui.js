@@ -88,12 +88,56 @@ describe('Bobun.UI', function () {
 
     describe('#get', function () {
 
-      it('should return the value of the option', function () {
+      beforeEach(function () {
         baseView.options = {
           foo: 'bar'
         };
+      });
 
+      it('should return the value of the option', function () {
         expect(baseView.get('foo')).to.equal('bar');
+      });
+    });
+
+    describe('#_bindOption', function () {
+
+      beforeEach(function () {
+        baseView.model = new Backbone.Model({
+          bar: 'hello'
+        });
+
+        baseView.options = {
+          foo: 'model.bar'
+        };
+      });
+
+      it('should set the model attribute to the option', function () {
+        baseView._bindOption('foo');
+        expect(baseView.get('foo'), 'hello');
+      });
+
+      it('should not trigger a change event when called', function () {
+        var spy = sinon.spy();
+        baseView.on('change:foo', spy);
+        baseView.on('change', spy);
+
+        baseView._bindOption('foo');
+        expect(baseView.get('foo'), 'hello');
+
+        expect(spy.called).to.be.false;
+      });
+
+      it('should listen change on the model', function () {
+        var spy = sinon.spy();
+
+        baseView._bindOption('foo');
+
+        baseView.on('change:foo', spy);
+
+        baseView.model.set('bar', 'test');
+
+        expect(spy.called).to.be.true;
+        expect(baseView.get('foo', 'test'));
       });
     });
   });
