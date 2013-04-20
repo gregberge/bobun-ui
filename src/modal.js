@@ -28,6 +28,8 @@
         model: this.model
       });
 
+      this.bindChange('title', this.views.header);
+
       this.views.body = this.body || new Bobun.UI.Modal.Body({
         model: this.model
       });
@@ -36,6 +38,8 @@
         buttons: this.get('buttons'),
         model: this.model
       });
+
+      this.bindChange('buttons', this.views.footer);
     },
 
     modal: function () {
@@ -70,10 +74,12 @@
       });
 
       this.views.title = new Bobun.UI.Modal.Header.Title({
+        title: this.get('title'),
         model: this.model,
-        el: Backbone.$('<h3>'),
-        title: this.get('title')
+        el: Backbone.$('<h3>')
       });
+
+      this.bindChange('title', this.views.title);
     },
 
     render: function () {
@@ -113,13 +119,15 @@
       buttons: []
     },
 
-    initialize: function () {
-      this.views = this.get('buttons');
+    render: function () {
+      _.each(this.get('buttons'), this.append, this);
+      return this;
     },
 
-    render: function () {
-      _.each(this.views, this.append, this);
-      return this;
+    stopListening: function () {
+      Bobun.UI.Base.prototype.stopListening.apply(this, arguments);
+
+      _.invoke(this.get('buttons'), 'stopListening');
     }
   });
 
