@@ -13,7 +13,7 @@ describe('Bobun.UI.Modal', function () {
   });
 
   describe('#modal', function () {
-    it('must show the modal', function () {
+    it('should show the modal', function () {
       modalView.render().modal();
 
       expect($('.modal')).to.exist;
@@ -23,7 +23,7 @@ describe('Bobun.UI.Modal', function () {
     });
   });
 
-  it('must remove the view when hide the modal', function () {
+  it('should remove the view when hide the modal', function () {
     modalView.remove = sinon.spy();
     modalView.render().modal();
     modalView.render().modal('hide');
@@ -31,7 +31,7 @@ describe('Bobun.UI.Modal', function () {
     expect(modalView.remove.called).to.be.true;
   });
 
-  it('must accept option "title"', function () {
+  it('should accept option "title"', function () {
     modalView = new Bobun.UI.Modal({
       title: 'test'
     });
@@ -41,7 +41,7 @@ describe('Bobun.UI.Modal', function () {
     expect($('.modal .modal-header h3')).to.have.text('test');
   });
 
-  it('must accept option "buttons"', function () {
+  it('should accept option "buttons"', function () {
     modalView = new Bobun.UI.Modal({
       buttons: [new Backbone.View({
         el: $('<div>hello</div>')
