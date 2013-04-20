@@ -53,10 +53,10 @@
         return ;
       }
 
-      this.bindChange(optionMatches[1], this, model, option);
+      this.bindChange(optionMatches[1], this, option, model);
     },
 
-    bindChange: function (originOption, target, origin, targetOption) {
+    bindChange: function (originOption, target, targetOption, origin) {
       origin = origin || this;
       targetOption = targetOption || originOption;
 
