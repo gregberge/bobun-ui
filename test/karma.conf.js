@@ -14,8 +14,10 @@ files = [
 
   'components/underscore/underscore.js',
   'components/backbone/backbone.js',
+  'components/bootstrap.css/js/bootstrap.js',
 
   'src/bobun-ui.js',
+  'src/modal.js',
 
   {pattern: 'test/fixtures/**/*', included: false, watched: true, served: true},
   'test/unit/**/*'

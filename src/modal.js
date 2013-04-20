@@ -15,27 +15,25 @@
 
     options: {
       title: null,
-      titleAttr: null,
       buttons: null,
-      headerView: null,
-      bodyView: null,
-      footerView: null
+      header: null,
+      body: null,
+      footer: null
     },
 
     initialize: function () {
-      // init sub-views
-      this.headerView = this.headerView || new Bobun.UI.Modal.Header({
-        title: this.options.title,
-        titleAttr: this.options.titleAttr,
+      // sub-views
+      this.views.header = this.header || new Bobun.UI.Modal.Header({
+        title: this.get('title'),
         model: this.model
       });
 
-      this.bodyView = this.bodyView || new Bobun.UI.Modal.Body({
+      this.views.body = this.body || new Bobun.UI.Modal.Body({
         model: this.model
       });
 
-      this.footerView = this.footerView || new Bobun.UI.Modal.Footer({
-        buttons: this.buttons,
+      this.views.footer = this.footer || new Bobun.UI.Modal.Footer({
+        buttons: this.get('buttons'),
         model: this.model
       });
     },
@@ -47,21 +45,9 @@
 
     render: function () {
       return this
-      .append(this.headerView)
-      .append(this.bodyView)
-      .append(this.footerView);
-    },
-
-    stopListening: function () {
-      Bobun.UI.Base.prototype.stopListening.apply(this, arguments);
-
-      console.log('stop');
-
-      _.invoke([
-        this.headerView,
-        this.bodyView,
-        this.footerView
-      ], 'stopListening');
+      .append(this.views.header)
+      .append(this.views.body)
+      .append(this.views.footer);
     }
   });
 
@@ -70,42 +56,49 @@
     className: 'modal-header',
 
     options: {
-      title: null,
-      titleAttr: null
+      title: null
     },
 
     initialize: function () {
-      // init elements
-      this.$closeButton = $('<button>')
-      .addClass('close')
-      .attr('data-dismiss', 'modal')
-      .html('&times;');
+      // sub-views
+      this.views.close = new Backbone.View({
+        model: this.model,
+        el: Backbone.$('<button>')
+        .addClass('close')
+        .attr('data-dismiss', 'modal')
+        .html('&times;')
+      });
 
-      this.$title = $('<h3>');
-
-      // init model
-      if (this.model && this.options.titleAttr) {
-        this.listenTo(this.model, 'change:' + this.options.titleAttr, function (model, value) {
-          this.set('title', value);
-        });
-
-        this.set('title', this.model.get(this.options.titleAttr));
-      }
-
-      // init events
-      this.on('change:title', this.renderTitle);
+      this.views.title = new Bobun.UI.Modal.Header.Title({
+        model: this.model,
+        el: Backbone.$('<h3>'),
+        title: this.get('title')
+      });
     },
 
     render: function () {
-      this.$el
-      .append(this.$closeButton)
-      .append(this.$title);
+      return this
+      .append(this.views.close)
+      .append(this.views.title);
+    }
+  });
 
-      return this.renderTitle();
+  Bobun.UI.Modal.Header.Title = Bobun.UI.Base.extend({
+
+    options: {
+      title: null
     },
 
-    renderTitle: function () {
-      this.$title.html(this.options.title);
+    initialize: function () {
+      // observers
+      this.bindOption('title');
+
+      // events
+      this.on('change:title', this.render);
+    },
+
+    render: function () {
+      this.$el.html(this.get('title'));
       return this;
     }
   });
@@ -123,18 +116,13 @@
       buttons: []
     },
 
-    render: function () {
-      _.each(this.options.buttons, function (button) {
-        this.append(button);
-      }, this);
-
-      return this;
+    initialize: function () {
+      this.views = this.get('buttons');
     },
 
-    stopListening: function () {
-      Bobun.UI.Base.prototype.stopListening.apply(this, arguments);
-
-      _.invoke(this.options.buttons, 'stopListening');
+    render: function () {
+      _.each(this.views, this.append, this);
+      return this;
     }
   });
 
