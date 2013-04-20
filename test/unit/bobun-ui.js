@@ -141,6 +141,18 @@ describe('Bobun.UI', function () {
       });
     });
 
+    describe('#_$trigger', function () {
+      it('should proxy a jQuery event', function () {
+        var spy = sinon.spy(),
+        event = $.Event('click');
+
+        baseView.on('click', spy);
+        baseView._$trigger(event);
+
+        expect(spy.called).to.be.true;
+      });
+    });
+
     describe('#views', function () {
       beforeEach(function () {
         baseView.views.myView = new Backbone.View();

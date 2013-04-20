@@ -56,6 +56,10 @@
       this.set(option, model.get(optionMatches[1]), {silent: true});
     },
 
+    _$trigger: function (event) {
+      this.trigger(event.type, event);
+    },
+
     stopListening: function () {
       context.Backbone.View.prototype.stopListening.apply(this, arguments);
 
