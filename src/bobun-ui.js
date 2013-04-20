@@ -5,6 +5,11 @@
   context.Bobun.UI = context.Bobun.UI || {};
 
   context.Bobun.UI.Base = context.Backbone.View.extend({
+
+    views: {},
+
+    k: 'to',
+
     append: function (view) {
       this.$el.append(view.render().el);
       view.delegateEvents();
@@ -47,6 +52,12 @@
       });
 
       this.set(option, model.get(optionMatches[1]), {silent: true});
+    },
+
+    stopListening: function () {
+      Backbone.View.prototype.stopListening.apply(this, arguments);
+
+      _.invoke(_.toArray(this.views), 'stopListening');
     }
   });
 }(window));

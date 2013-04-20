@@ -140,5 +140,20 @@ describe('Bobun.UI', function () {
         expect(baseView.get('foo', 'test'));
       });
     });
+
+    describe('#views', function () {
+      beforeEach(function () {
+        baseView.views.myView = new Backbone.View();
+      });
+
+      it('should invoke stopListening on all sub-views', function () {
+        baseView.views.myView.stopListening = sinon.spy();
+
+        baseView.stopListening();
+
+        expect(baseView.views.myView.stopListening.called).to.be.true;
+      });
+    });
+
   });
 });
