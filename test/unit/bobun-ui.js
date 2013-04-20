@@ -85,5 +85,16 @@ describe('Bobun.UI', function () {
         expect(spy.called).to.be.false;
       });
     });
+
+    describe('#get', function () {
+
+      it('should return the value of the option', function () {
+        baseView.options = {
+          foo: 'bar'
+        };
+
+        expect(baseView.get('foo')).to.equal('bar');
+      });
+    });
   });
 });

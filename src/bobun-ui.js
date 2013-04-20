@@ -11,15 +11,19 @@
       return this;
     },
 
-    set: function (key, value, options) {
+    set: function (option, value, options) {
       options = options || {};
 
-      this.options[key] = value;
+      this.options[option] = value;
 
       if (! options.silent) {
-        this.trigger('change:' + key, this, value, options);
+        this.trigger('change:' + option, this, value, options);
         this.trigger('change', this, options);
       }
+    },
+
+    get: function (option) {
+      return this.options[option];
     }
   });
 }(window));
