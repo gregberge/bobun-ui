@@ -6,9 +6,11 @@
 
   context.Bobun.UI.Base = context.Backbone.View.extend({
 
-    views: {},
+    _configure: function () {
+      context.Backbone.View.prototype._configure.apply(this, arguments);
 
-    k: 'to',
+      this.views = this.options.views || {};
+    },
 
     append: function (view) {
       this.$el.append(view.render().el);
@@ -31,7 +33,7 @@
       return this.options[option];
     },
 
-    _bindOption: function (option, model) {
+    bindOption: function (option, model) {
       var optionValue, optionMatches;
 
       model = model || this.model;
@@ -55,7 +57,7 @@
     },
 
     stopListening: function () {
-      Backbone.View.prototype.stopListening.apply(this, arguments);
+      context.Backbone.View.prototype.stopListening.apply(this, arguments);
 
       _.invoke(_.toArray(this.views), 'stopListening');
     }

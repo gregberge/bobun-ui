@@ -99,7 +99,7 @@ describe('Bobun.UI', function () {
       });
     });
 
-    describe('#_bindOption', function () {
+    describe('#bindOption', function () {
 
       beforeEach(function () {
         baseView.model = new Backbone.Model({
@@ -112,7 +112,7 @@ describe('Bobun.UI', function () {
       });
 
       it('should set the model attribute to the option', function () {
-        baseView._bindOption('foo');
+        baseView.bindOption('foo');
         expect(baseView.get('foo'), 'hello');
       });
 
@@ -121,7 +121,7 @@ describe('Bobun.UI', function () {
         baseView.on('change:foo', spy);
         baseView.on('change', spy);
 
-        baseView._bindOption('foo');
+        baseView.bindOption('foo');
         expect(baseView.get('foo'), 'hello');
 
         expect(spy.called).to.be.false;
@@ -130,7 +130,7 @@ describe('Bobun.UI', function () {
       it('should listen change on the model', function () {
         var spy = sinon.spy();
 
-        baseView._bindOption('foo');
+        baseView.bindOption('foo');
 
         baseView.on('change:foo', spy);
 
