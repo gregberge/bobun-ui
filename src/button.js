@@ -17,11 +17,13 @@
     },
 
     initialize: function () {
+      // events
       this.on('change:label', this.updateLabel);
       this.on('change:disabled', this.updateDisabled);
     },
 
     render: function () {
+      // update
       this.updateLabel();
       this.updateDisabled();
       return this;
