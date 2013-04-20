@@ -11,7 +11,9 @@
 
       this.views = this.options.views || {};
 
-      _.each(this.options, this._bindModelOption, this);
+      _.each(this.options, function (value, option) {
+        this._bindModelOption(option);
+      }, this);
     },
 
     append: function (view) {
