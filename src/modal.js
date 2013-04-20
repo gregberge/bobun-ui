@@ -90,9 +90,6 @@
     },
 
     initialize: function () {
-      // observers
-      this.bindOption('title');
-
       // events
       this.on('change:title', this.render);
     },
