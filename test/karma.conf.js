@@ -9,8 +9,9 @@ files = [
   MOCHA_ADAPTER,
   'node_modules/chai/chai.js',
   'node_modules/sinon/pkg/sinon.js',
-
   'components/jquery/jquery.js',
+  'node_modules/chai-jquery/chai-jquery.js',
+
   'components/underscore/underscore.js',
   'components/backbone/backbone.js',
 
