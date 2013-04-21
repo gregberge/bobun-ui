@@ -19,6 +19,7 @@ files = [
   'src/bobun-ui.js',
   'src/modal.js',
   'src/button.js',
+  'src/icon-button.js',
 
   {pattern: 'test/fixtures/**/*', included: false, watched: true, served: true},
   'test/unit/**/*'
