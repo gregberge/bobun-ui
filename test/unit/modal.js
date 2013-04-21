@@ -12,6 +12,30 @@ describe('Bobun.UI.Modal', function () {
     modalView.remove();
   });
 
+  describe('#options', function () {
+    it('#title', function () {
+      modalView = new Bobun.UI.Modal({
+        title: 'test'
+      });
+
+      modalView.render().modal();
+
+      expect($('.modal .modal-header h3')).to.have.text('test');
+    });
+
+    it('#buttons', function () {
+      modalView = new Bobun.UI.Modal({
+        buttons: [new Backbone.View({
+          el: $('<div>hello</div>')
+        })]
+      });
+
+      modalView.render().modal();
+
+      expect($('.modal .modal-footer div')).to.have.text('hello');
+    });
+  });
+
   describe('#modal', function () {
     it('should show the modal', function () {
       modalView.render().modal();
@@ -29,27 +53,5 @@ describe('Bobun.UI.Modal', function () {
     modalView.render().modal('hide');
 
     expect(modalView.remove.called).to.be.true;
-  });
-
-  it('should accept option "title"', function () {
-    modalView = new Bobun.UI.Modal({
-      title: 'test'
-    });
-
-    modalView.render().modal();
-
-    expect($('.modal .modal-header h3')).to.have.text('test');
-  });
-
-  it('should accept option "buttons"', function () {
-    modalView = new Bobun.UI.Modal({
-      buttons: [new Backbone.View({
-        el: $('<div>hello</div>')
-      })]
-    });
-
-    modalView.render().modal();
-
-    expect($('.modal .modal-footer div')).to.have.text('hello');
   });
 });

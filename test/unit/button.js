@@ -12,29 +12,31 @@ describe('Bobun.UI.Button', function () {
     buttonView.remove();
   });
 
-  it('should accept option "label"', function () {
-    buttonView = new Bobun.UI.Button({
-      label: 'test'
+  describe('#options', function () {
+    it('#label', function () {
+      buttonView = new Bobun.UI.Button({
+        label: 'test'
+      });
+
+      $('body').append(buttonView.render().el);
+
+      expect($('.btn')).to.have.text('test');
     });
 
-    $('body').append(buttonView.render().el);
+    it('#disabled', function () {
+      buttonView = new Bobun.UI.Button({
+        disabled: true
+      });
 
-    expect($('.btn')).to.have.text('test');
-  });
+      $('body').append(buttonView.render().el);
 
-  it('should accept option "disabled"', function () {
-    buttonView = new Bobun.UI.Button({
-      disabled: true
+      expect($('.btn')).to.have.attr('disabled', 'disabled');
     });
-
-    $('body').append(buttonView.render().el);
-
-    expect($('.btn')).to.have.attr('disabled', 'disabled');
   });
 
-  describe('on click', function () {
+  describe('#events', function () {
 
-    it('should trigger a "click" event', function () {
+    it('#click', function () {
       var spy = sinon.spy();
 
       buttonView.on('click', spy);
