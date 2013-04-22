@@ -15,9 +15,6 @@
         processingIconClassName: 'icon-spin icon-spinner'
       }, Bobun.UI.Button.prototype.options, this.options);
 
-      // disabled: true -> disabled
-      // disabled: false && processing: true -> disabled
-
       this.options.disabled = this.options.processing || this.options.disabled;
 
       this.bindChange('processing', this, {
@@ -25,7 +22,7 @@
         set: false
       });
 
-      // views
+      // icon
       this.options.iconView = this.get('iconView') || new Bobun.UI.IconButton.Icon({
         model: this.model,
         processing: this.get('processing'),
@@ -39,6 +36,7 @@
 
       this.views.add(this.get('iconView'));
 
+      // label
       this.options.labelView = this.get('labelView') || new Bobun.UI.IconButton.Label({
         model: this.model,
         label: this.get('label')

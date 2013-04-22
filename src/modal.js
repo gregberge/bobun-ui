@@ -15,14 +15,14 @@
 
     options: {
       title: null,
-      buttons: null,
+      buttons: [],
       headerView: null,
       bodyView: null,
       footerView: null
     },
 
     initialize: function () {
-      // views
+      // header
       this.options.headerView = this.get('headerView') || new Bobun.UI.Modal.Header({
         model: this.model,
         title: this.get('title')
@@ -32,12 +32,14 @@
 
       this.views.add(this.get('headerView'));
 
+      // body
       this.options.bodyView = this.get('bodyView') || new Bobun.UI.Modal.Body({
         model: this.model
       });
 
       this.views.add(this.get('bodyView'));
 
+      // footer
       this.options.footerView = this.get('footerView') || new Bobun.UI.Modal.Footer({
         model: this.model,
         views: this.get('buttons')
@@ -65,7 +67,7 @@
     },
 
     initialize: function () {
-      // sub-views
+      // close
       this.options.closeView = this.get('closeView') || new Backbone.View({
         model: this.model,
         el: Backbone.$('<button>')
@@ -76,6 +78,7 @@
 
       this.views.add(this.get('closeView'));
 
+      // title
       this.options.titleView = this.get('titleView') || new Bobun.UI.Modal.Header.Title({
         title: this.get('title'),
         model: this.model,
