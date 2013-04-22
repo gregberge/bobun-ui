@@ -73,7 +73,8 @@
       typeof optionsArg === 'object' ? optionsArg : {};
 
       options = _.extend({
-        silent: true
+        silent: true,
+        set: true
       }, options);
 
       originOption = typeof originOption === 'string' ? originOption : options.originOption;
@@ -85,7 +86,9 @@
         target.set(targetOption, value);
       });
 
-      target.set(targetOption, origin.get(originOption), options);
+      if (options.set) {
+        target.set(targetOption, origin.get(originOption), options);
+      }
     },
 
     _$trigger: function (event) {

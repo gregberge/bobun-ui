@@ -6,8 +6,6 @@
     className: 'btn btn-icon',
 
     initialize: function () {
-      var oldDisabled;
-
       Bobun.UI.Button.prototype.initialize.apply(this, arguments);
 
       // options
@@ -17,13 +15,15 @@
         processingIconClassName: 'icon-spin icon-spinner'
       }, Bobun.UI.Button.prototype.options, this.options);
 
-      oldDisabled = this.options.disabled;
+      // disabled: true -> disabled
+      // disabled: false && processing: true -> disabled
 
-      this.bindChange('processing', this, 'disabled');
+      this.options.disabled = this.options.processing || this.options.disabled;
 
-      if (! this.options.processing) {
-        this.options.disabled = oldDisabled;
-      }
+      this.bindChange('processing', this, {
+        targetOption: 'disabled',
+        set: false
+      });
 
       // views
       this.options.iconView = this.get('iconView') || new Bobun.UI.IconButton.Icon({
