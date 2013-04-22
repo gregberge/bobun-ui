@@ -16,42 +16,41 @@
     options: {
       title: null,
       buttons: null,
-      header: null,
-      body: null,
-      footer: null
+      headerView: null,
+      bodyView: null,
+      footerView: null
     },
 
     initialize: function () {
-      // sub-views
-      this.views.header = this.header || new Bobun.UI.Modal.Header({
-        title: this.get('title'),
+      // views
+      this.options.headerView = this.get('headerView') || new Bobun.UI.Modal.Header({
+        model: this.model,
+        title: this.get('title')
+      });
+
+      this.bindChange('title', this.get('headerView'));
+
+      this.views.add(this.get('headerView'));
+
+      this.options.bodyView = this.get('bodyView') || new Bobun.UI.Modal.Body({
         model: this.model
       });
 
-      this.bindChange('title', this.views.header);
+      this.views.add(this.get('bodyView'));
 
-      this.views.body = this.body || new Bobun.UI.Modal.Body({
-        model: this.model
+      this.options.footerView = this.get('footerView') || new Bobun.UI.Modal.Footer({
+        model: this.model,
+        views: this.get('buttons')
       });
 
-      this.views.footer = this.footer || new Bobun.UI.Modal.Footer({
-        buttons: this.get('buttons'),
-        model: this.model
-      });
+      this.bindChange('buttons', this.get('footerView'), 'views');
 
-      this.bindChange('buttons', this.views.footer);
+      this.views.add(this.get('footerView'));
     },
 
     modal: function () {
       this.delegateEvents();
       this.$el.modal.apply(this.$el, arguments);
-    },
-
-    render: function () {
-      return this
-      .append(this.views.header)
-      .append(this.views.body)
-      .append(this.views.footer);
     }
   });
 
@@ -60,12 +59,14 @@
     className: 'modal-header',
 
     options: {
-      title: null
+      title: null,
+      closeView: null,
+      titleView: null
     },
 
     initialize: function () {
       // sub-views
-      this.views.close = new Backbone.View({
+      this.options.closeView = this.get('closeView') || new Backbone.View({
         model: this.model,
         el: Backbone.$('<button>')
         .addClass('close')
@@ -73,19 +74,17 @@
         .html('&times;')
       });
 
-      this.views.title = new Bobun.UI.Modal.Header.Title({
+      this.views.add(this.get('closeView'));
+
+      this.options.titleView = this.get('titleView') || new Bobun.UI.Modal.Header.Title({
         title: this.get('title'),
         model: this.model,
         el: Backbone.$('<h3>')
       });
 
-      this.bindChange('title', this.views.title);
-    },
+      this.bindChange('title', this.get('titleView'));
 
-    render: function () {
-      return this
-      .append(this.views.close)
-      .append(this.views.title);
+      this.views.add(this.get('titleView'));
     }
   });
 
@@ -96,11 +95,10 @@
     },
 
     initialize: function () {
-      // events
-      this.on('change:title', this.render);
+      this.on('change:title', this.update);
     },
 
-    render: function () {
+    update: function () {
       this.$el.html(this.get('title'));
       return this;
     }
@@ -113,22 +111,7 @@
 
   Bobun.UI.Modal.Footer = Bobun.UI.Base.extend({
 
-    className: 'modal-footer',
-
-    options: {
-      buttons: []
-    },
-
-    render: function () {
-      _.each(this.get('buttons'), this.append, this);
-      return this;
-    },
-
-    stopListening: function () {
-      Bobun.UI.Base.prototype.stopListening.apply(this, arguments);
-
-      _.invoke(this.get('buttons'), 'stopListening');
-    }
+    className: 'modal-footer'
   });
 
 }());

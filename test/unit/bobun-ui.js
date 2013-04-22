@@ -170,16 +170,19 @@ describe('Bobun.UI', function () {
     });
 
     describe('#views', function () {
+      var myView;
+
       beforeEach(function () {
-        baseView.views.myView = new Backbone.View();
+        myView = new Backbone.View();
+        baseView.views.add(myView, 'myView');
       });
 
       it('should invoke stopListening on all sub-views', function () {
-        baseView.views.myView.stopListening = sinon.spy();
+        myView.stopListening = sinon.spy();
 
         baseView.stopListening();
 
-        expect(baseView.views.myView.stopListening.called).to.be.true;
+        expect(myView.stopListening.called).to.be.true;
       });
     });
 

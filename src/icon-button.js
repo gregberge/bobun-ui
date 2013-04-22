@@ -26,31 +26,31 @@
       }
 
       // views
-      this.views.icon = new Bobun.UI.IconButton.Icon({
+      this.options.iconView = this.get('iconView') || new Bobun.UI.IconButton.Icon({
         model: this.model,
         processing: this.get('processing'),
         defaultClassName: this.get('defaultIconClassName'),
         processingClassName: this.get('processingIconClassName')
       });
 
-      this.bindChange('processing', this.views.icon);
-      this.bindChange('defaultIconClassName', this.views.icon, 'defaultClassName');
-      this.bindChange('processingIconClassName', this.views.icon, 'processingClassName');
+      this.bindChange('processing', this.get('iconView'));
+      this.bindChange('defaultIconClassName', this.get('iconView'), 'defaultClassName');
+      this.bindChange('processingIconClassName', this.get('iconView'), 'processingClassName');
 
-      this.views.label = new Bobun.UI.IconButton.Label({
+      this.views.add(this.get('iconView'));
+
+      this.options.labelView = this.get('labelView') || new Bobun.UI.IconButton.Label({
         model: this.model,
         label: this.get('label')
       });
 
-      this.bindChange('label', this.views.label);
+      this.bindChange('label', this.get('labelView'));
+
+      this.views.add(this.get('labelView'));
     },
 
-    render: function () {
-      this.updateDisabled();
-
-      return this
-      .append(this.views.icon)
-      .append(this.views.label);
+    update: function () {
+      return this.updateDisabled();
     }
   });
 
@@ -68,16 +68,9 @@
       this.on('change:processing change:defaultClassName change:processingClassName', this.render);
     },
 
-    render: function () {
-      if (this.get('processing')) {
-        this.$el.addClass(this.get('processingClassName'));
-        this.$el.removeClass(this.get('defaultClassName'));
-      }
-      else {
-        this.$el.removeClass(this.get('processingClassName'));
-        this.$el.addClass(this.get('defaultClassName'));
-      }
-
+    update: function () {
+      this.$el.toggleClass(this.get('processingClassName'), this.get('processing'));
+      this.$el.toggleClass(this.get('defaultClassName'), ! this.get('processing'));
       return this;
     }
   });
@@ -94,7 +87,7 @@
       this.on('change:label', this.render);
     },
 
-    render: function () {
+    update: function () {
       this.$el.html(this.get('label'));
       return this;
     }

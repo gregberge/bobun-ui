@@ -10,6 +10,9 @@
     "package.json",
     "test"
   ],
+  "dependencies": {
+    "backbone.babysitter": "~0.0.5"
+  },
   "devDependencies": {
     "backbone": "~1.0.0",
     "underscore": "~1.4.4",

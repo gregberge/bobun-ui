@@ -22,24 +22,20 @@
       this.on('change:disabled', this.updateDisabled);
     },
 
-    render: function () {
-      // update
-      this.updateLabel();
-      this.updateDisabled();
-      return this;
+    update: function () {
+      return this
+      .updateDisabled()
+      .updateLabel();
     },
 
     updateLabel: function () {
       this.$el.html(this.get('label'));
+      return this;
     },
 
     updateDisabled: function () {
-      if (this.get('disabled')) {
-        this.$el.attr('disabled', 'disabled');
-      }
-      else {
-        this.$el.removeAttr('disabled');
-      }
+      this.$el.prop('disabled', this.get('disabled'));
+      return this;
     }
   });
 }());
