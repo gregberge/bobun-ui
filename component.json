@@ -13,7 +13,8 @@
   ],
   "dependencies": {
     "backbone.babysitter": "~0.0.5",
-    "bobun-binding": "~0.1.1"
+    "bobun-binding": "~0.1.1",
+    "rivets": "~0.4.9"
   },
   "devDependencies": {
     "backbone": "~1.0.0",

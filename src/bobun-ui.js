@@ -3,15 +3,34 @@
 
   var root = this;
 
+  root.rivets.configure({
+    adapter: {
+      subscribe: function(obj, keypath, callback) {
+        obj.on('change:' + keypath, callback);
+      },
+      unsubscribe: function(obj, keypath, callback) {
+        obj.off('change:' + keypath, callback);
+      },
+      read: function(obj, keypath) {
+        return obj.get(keypath);
+      },
+      publish: function(obj, keypath, value) {
+        obj.set(keypath, value);
+      }
+    }
+  });
+
   root.Bobun = root.Bobun || {};
   root.Bobun.UI = root.Bobun.UI || {};
+
+  root.Bobun.rivets = _.clone(root.rivets);
 
   root.Bobun.UI.Base = root.Backbone.View.extend({
 
     changed: null,
 
-    _configure: function () {
-      root.Backbone.View.prototype._configure.apply(this, arguments);
+    initialize: function () {
+      root.Backbone.View.prototype.initialize.apply(this, arguments);
 
       this.views = new Backbone.ChildViewContainer(this.options.views || []);
 
@@ -23,6 +42,8 @@
       _.each(this.options, function (value, option) {
         this._bindModelOption(option);
       }, this);
+
+      this.domView = root.rivets.bind(this.$el, {view: this, model: this.model});
     },
 
     append: function (view) {

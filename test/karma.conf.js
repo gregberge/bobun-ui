@@ -17,6 +17,7 @@ files = [
   'components/bootstrap.css/js/bootstrap.js',
   'components/bobun-binding/src/bobun-binding.js',
   'components/backbone.babysitter/src/childviewcontainer.js',
+  'components/rivets/lib/rivets.js',
 
   'src/bobun-ui.js',
   'src/modal.js',

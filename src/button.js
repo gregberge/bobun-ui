@@ -19,7 +19,13 @@
       disabled: false
     },
 
+    attributes: {
+      'data-disabled': 'view.disabled'
+    },
+
     initialize: function () {
+      root.Bobun.UI.Base.prototype.initialize.apply(this, arguments);
+
       // label
       this.options.labelView = this.get('labelView') || new root.Bobun.UI.Button.Label({
         model: this.model,
@@ -28,20 +34,11 @@
 
       this.bind(this.get('labelView'), 'label');
       this.views.add(this.get('labelView'));
-
-      // events
-      this.on('change:disabled', this.updateDisabled);
     },
 
     render: function () {
       return this
-      .append(this.get('labelView'))
-      .updateDisabled();
-    },
-
-    updateDisabled: function () {
-      this.$el.prop('disabled', this.get('disabled'));
-      return this;
+      .append(this.get('labelView'));
     }
   });
 
@@ -53,13 +50,8 @@
       label: null
     },
 
-    initialize: function () {
-      this.on('change:label', this.render);
-    },
-
-    render: function () {
-      this.$el.html(this.get('label'));
-      return this;
+    attributes: {
+      'data-text': 'view.label'
     }
   });
 }).call(this);

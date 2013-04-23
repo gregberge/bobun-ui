@@ -34,14 +34,16 @@
         'defaultIconClassName': 'defaultClassName',
         'processingIconClassName': 'processingClassName'
       });
+
       this.views.add(this.get('iconView'));
+
+      this.domView.sync();
     },
 
     render: function () {
       return this
       .append(this.get('iconView'))
-      .append(this.get('labelView'))
-      .updateDisabled();
+      .append(this.get('labelView'));
     }
   });
 
@@ -56,6 +58,8 @@
     },
 
     initialize: function () {
+      root.Bobun.UI.Base.prototype.initialize.apply(this, arguments);
+
       this.on('change:processing change:defaultClassName change:processingClassName', this.render);
     },
 

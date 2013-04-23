@@ -56,7 +56,6 @@ describe('Bobun.UI.IconButton', function () {
         defaultIconClassName: 'std'
       });
       $('body').append(iconButtonView.render().el);
-      expect($('.btn')).to.have.attr('disabled', 'disabled');
       expect($('.btn i')).to.have.class('processing');
       expect($('.btn i')).to.not.have.class('std');
 

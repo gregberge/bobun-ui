@@ -24,6 +24,8 @@
     },
 
     initialize: function () {
+      root.Bobun.UI.Base.prototype.initialize.apply(this, arguments);
+
       // header
       this.options.headerView = this.get('headerView') || new root.Bobun.UI.Modal.Header({
         model: this.model,
@@ -76,6 +78,8 @@
     },
 
     initialize: function () {
+      root.Bobun.UI.Base.prototype.initialize.apply(this, arguments);
+
       // close
       this.options.closeView = this.get('closeView') || new root.Bobun.UI.Base({
         model: this.model,
@@ -113,13 +117,8 @@
       title: null
     },
 
-    initialize: function () {
-      this.on('change:title', this.update);
-    },
-
-    render: function () {
-      this.$el.html(this.get('title'));
-      return this;
+    attributes: {
+      'data-text': 'view.title'
     }
   });
 
