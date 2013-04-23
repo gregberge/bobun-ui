@@ -12,7 +12,8 @@
     "test"
   ],
   "dependencies": {
-    "backbone.babysitter": "~0.0.5"
+    "backbone.babysitter": "~0.0.5",
+    "bobun-binding": "~0.1.1"
   },
   "devDependencies": {
     "backbone": "~1.0.0",

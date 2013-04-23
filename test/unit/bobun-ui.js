@@ -75,6 +75,17 @@ describe('Bobun.UI', function () {
         expect(spy.firstCall.args[1]).to.equal('opts');
       });
 
+      it('should not trigger an event if the attribute is equal', function () {
+        var spy = sinon.spy();
+        baseView.on('change:foo', spy);
+        baseView.on('change', spy);
+
+        baseView.options.foo = 'bar';
+        baseView.set('foo', 'bar');
+
+        expect(spy.called).to.be.false;
+      });
+
       it('should not trigger an event with silent option', function () {
         var spy = sinon.spy();
         baseView.on('change:foo', spy);
@@ -96,22 +107,6 @@ describe('Bobun.UI', function () {
 
       it('should return the value of the option', function () {
         expect(baseView.get('foo')).to.equal('bar');
-      });
-    });
-
-    describe('#bindChange', function () {
-
-      it('should bind a change event to an object', function () {
-        var spy = sinon.spy(),
-        model = new Backbone.Model();
-
-        model.on('change:foo', spy);
-        baseView.bindChange('foo', model);
-
-        baseView.set('foo', 'bar');
-
-        expect(spy.called).to.be.true;
-        expect(model.get('foo')).to.equal('bar');
       });
     });
 

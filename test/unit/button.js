@@ -21,6 +21,10 @@ describe('Bobun.UI.Button', function () {
       $('body').append(buttonView.render().el);
 
       expect($('.btn')).to.have.text('test');
+
+      // set
+      buttonView.set('label', 'test2');
+      expect($('.btn')).to.have.text('test2');
     });
 
     it('#disabled', function () {

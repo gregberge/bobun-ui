@@ -8,6 +8,8 @@
 
   root.Bobun.UI.Base = root.Backbone.View.extend({
 
+    changed: null,
+
     _configure: function () {
       root.Backbone.View.prototype._configure.apply(this, arguments);
 
@@ -29,15 +31,67 @@
       return this;
     },
 
-    set: function (option, value, options) {
+    set: function (key, val, options) {
+      var opts, opt, changes, silent, changing, prev, current;
+
+      if (typeof key === 'object') {
+        opts = key;
+        options = val;
+      } else {
+        (opts = {})[key] = val;
+      }
+
       options = options || {};
 
-      this.options[option] = value;
+      silent = options.silent;
+      changes = [];
+      changing = this._changing;
+      this._changing = true;
 
-      if (! options.silent) {
-        this.trigger('change:' + option, this, value, options);
-        this.trigger('change', this, options);
+      if (! changing) {
+        this._previousOptions = _.clone(this.options);
+        this.changed = {};
       }
+
+      current = this.options;
+      prev = this._previousOptions;
+
+      for (opt in opts) {
+        val = opts[opt];
+        if (!_.isEqual(current[opt], val)) {
+          changes.push(opt);
+        }
+        if (!_.isEqual(prev[opt], val)) {
+          this.changed[opt] = val;
+        } else {
+          delete this.changed[opt];
+        }
+        current[opt] = val;
+      }
+
+
+      if (! silent) {
+        if (changes.length) {
+          this._pending = true;
+        }
+        for (var i = 0, l = changes.length; i < l; i++) {
+          this.trigger('change:' + changes[i], this, current[changes[i]], options);
+        }
+      }
+
+      if (changing) {
+        return this;
+      }
+
+      if (! silent) {
+        while (this._pending) {
+          this._pending = false;
+          this.trigger('change', this, options);
+        }
+      }
+      this._pending = false;
+      this._changing = false;
+      return this;
     },
 
     get: function (option) {
@@ -45,7 +99,7 @@
     },
 
     _bindModelOption: function (option, model) {
-      var optionValue, optionMatches;
+      var optionValue, optionMatches, attributes;
 
       model = model || this.model;
       optionValue = this.options[option];
@@ -60,50 +114,15 @@
         return ;
       }
 
-      this.bindChange({
-        origin: model,
-        originOption: optionMatches[1],
-        target: this,
-        targetOption: option
-      });
-    },
+      attributes = {};
+      attributes[option] = optionMatches[1];
 
-    bindChange: function (originOption, target, optionsArg) {
-      var options, origin, targetOption;
-
-      options = typeof originOption === 'object' ? originOption :
-      typeof optionsArg === 'object' ? optionsArg : {};
-
-      options = _.extend({
-        silent: true,
-        set: true
-      }, options);
-
-      originOption = typeof originOption === 'string' ? originOption : options.originOption;
-      target = target || options.target;
-      origin = options.origin || this;
-      targetOption = typeof optionsArg === 'string' ? optionsArg : options.targetOption || originOption;
-
-      this.listenTo(origin, 'change:' + originOption, function (origin, value) {
-        target.set(targetOption, value);
-      });
-
-      if (options.set) {
-        target.set(targetOption, origin.get(originOption), options);
-      }
+      this.bind(model, attributes);
+      this.set(option, model.get(optionMatches[1]), {silent: true});
     },
 
     _$trigger: function (event) {
       this.trigger(event.type, event);
-    },
-
-    update: function () {
-      return this;
-    },
-
-    render: function () {
-      this.views.each(this.append, this);
-      return this.update();
     },
 
     remove: function () {
@@ -116,4 +135,11 @@
       this.views.invoke('stopListening');
     }
   });
+
+  _.each(['bindTo', 'bind'], function (method) {
+    Bobun.UI.Base.prototype[method] = function () {
+      return Bobun.Binding[method].apply(this, [this].concat(_.toArray(arguments)));
+    };
+  });
+
 }).call(this);

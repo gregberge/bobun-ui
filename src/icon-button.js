@@ -19,38 +19,29 @@
 
       this.options.disabled = this.options.processing || this.options.disabled;
 
-      this.bindChange('processing', this, {
-        targetOption: 'disabled',
-        set: false
-      });
+      this.bindTo(this, {'processing': 'disabled'});
 
       // icon
-      this.options.iconView = this.get('iconView') || new Bobun.UI.IconButton.Icon({
+      this.options.iconView = this.get('iconView') || new root.Bobun.UI.IconButton.Icon({
         model: this.model,
         processing: this.get('processing'),
         defaultClassName: this.get('defaultIconClassName'),
         processingClassName: this.get('processingIconClassName')
       });
 
-      this.bindChange('processing', this.get('iconView'));
-      this.bindChange('defaultIconClassName', this.get('iconView'), 'defaultClassName');
-      this.bindChange('processingIconClassName', this.get('iconView'), 'processingClassName');
-
-      this.views.add(this.get('iconView'));
-
-      // label
-      this.options.labelView = this.get('labelView') || new Bobun.UI.IconButton.Label({
-        model: this.model,
-        label: this.get('label')
+      this.bind(this.get('iconView'), {
+        'processing': 'processing',
+        'defaultIconClassName': 'defaultClassName',
+        'processingIconClassName': 'processingClassName'
       });
-
-      this.bindChange('label', this.get('labelView'));
-
-      this.views.add(this.get('labelView'));
+      this.views.add(this.get('iconView'));
     },
 
-    update: function () {
-      return this.updateDisabled();
+    render: function () {
+      return this
+      .append(this.get('iconView'))
+      .append(this.get('labelView'))
+      .updateDisabled();
     }
   });
 
@@ -68,27 +59,9 @@
       this.on('change:processing change:defaultClassName change:processingClassName', this.render);
     },
 
-    update: function () {
+    render: function () {
       this.$el.toggleClass(this.get('processingClassName'), this.get('processing'));
       this.$el.toggleClass(this.get('defaultClassName'), ! this.get('processing'));
-      return this;
-    }
-  });
-
-  root.Bobun.UI.IconButton.Label = root.Bobun.UI.Base.extend({
-
-    tagName: 'span',
-
-    options: {
-      label: null
-    },
-
-    initialize: function () {
-      this.on('change:label', this.render);
-    },
-
-    update: function () {
-      this.$el.html(this.get('label'));
       return this;
     }
   });
