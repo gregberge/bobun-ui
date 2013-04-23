@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  Bobun.UI.Modal = Bobun.UI.Base.extend({
+  var root = this;
+
+  root.Bobun.UI.Modal = root.Bobun.UI.Base.extend({
 
     className: 'modal',
 
@@ -56,7 +58,7 @@
     }
   });
 
-  Bobun.UI.Modal.Header = Bobun.UI.Base.extend({
+  root.Bobun.UI.Modal.Header = root.Bobun.UI.Base.extend({
 
     className: 'modal-header',
 
@@ -91,7 +93,7 @@
     }
   });
 
-  Bobun.UI.Modal.Header.Title = Bobun.UI.Base.extend({
+  root.Bobun.UI.Modal.Header.Title = root.Bobun.UI.Base.extend({
 
     options: {
       title: null
@@ -107,14 +109,14 @@
     }
   });
 
-  Bobun.UI.Modal.Body = Bobun.UI.Base.extend({
+  root.Bobun.UI.Modal.Body = root.Bobun.UI.Base.extend({
 
     className: 'modal-body'
   });
 
-  Bobun.UI.Modal.Footer = Bobun.UI.Base.extend({
+  root.Bobun.UI.Modal.Footer = root.Bobun.UI.Base.extend({
 
     className: 'modal-footer'
   });
 
-}());
+}).call(this);

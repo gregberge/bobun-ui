@@ -1,13 +1,15 @@
-(function (context) {
+(function () {
   'use strict';
 
-  context.Bobun = context.Bobun || {};
-  context.Bobun.UI = context.Bobun.UI || {};
+  var root = this;
 
-  context.Bobun.UI.Base = context.Backbone.View.extend({
+  root.Bobun = root.Bobun || {};
+  root.Bobun.UI = root.Bobun.UI || {};
+
+  root.Bobun.UI.Base = root.Backbone.View.extend({
 
     _configure: function () {
-      context.Backbone.View.prototype._configure.apply(this, arguments);
+      root.Backbone.View.prototype._configure.apply(this, arguments);
 
       this.views = new Backbone.ChildViewContainer(this.options.views || []);
 
@@ -105,13 +107,13 @@
     },
 
     remove: function () {
-      context.Backbone.View.prototype.remove.apply(this, arguments);
+      root.Backbone.View.prototype.remove.apply(this, arguments);
       this.views.invoke('remove');
     },
 
     stopListening: function () {
-      context.Backbone.View.prototype.stopListening.apply(this, arguments);
+      root.Backbone.View.prototype.stopListening.apply(this, arguments);
       this.views.invoke('stopListening');
     }
   });
-}(window));
+}).call(this);

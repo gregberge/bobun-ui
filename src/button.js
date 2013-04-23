@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  Bobun.UI.Button = Bobun.UI.Base.extend({
+  var root = this;
+
+  root.Bobun.UI.Button = root.Bobun.UI.Base.extend({
 
     tagName: 'button',
 
@@ -38,4 +40,4 @@
       return this;
     }
   });
-}());
+}).call(this);

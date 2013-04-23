@@ -1,12 +1,14 @@
 (function () {
   'use strict';
 
-  Bobun.UI.IconButton = Bobun.UI.Button.extend({
+  var root = this;
+
+  root.Bobun.UI.IconButton = root.Bobun.UI.Button.extend({
 
     className: 'btn btn-icon',
 
     initialize: function () {
-      Bobun.UI.Button.prototype.initialize.apply(this, arguments);
+      root.Bobun.UI.Button.prototype.initialize.apply(this, arguments);
 
       // options
       this.options = _.extend({
@@ -52,7 +54,7 @@
     }
   });
 
-  Bobun.UI.IconButton.Icon = Bobun.UI.Base.extend({
+  root.Bobun.UI.IconButton.Icon = root.Bobun.UI.Base.extend({
 
     tagName: 'i',
 
@@ -73,7 +75,7 @@
     }
   });
 
-  Bobun.UI.IconButton.Label = Bobun.UI.Base.extend({
+  root.Bobun.UI.IconButton.Label = root.Bobun.UI.Base.extend({
 
     tagName: 'span',
 
@@ -90,4 +92,4 @@
       return this;
     }
   });
-}());
+}).call(this);
