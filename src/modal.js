@@ -54,8 +54,7 @@
 
     modal: function () {
       this.delegateEvents();
-      if (this.$el)
-        this.$el.modal.apply(this.$el, arguments);
+      this.$el.modal.apply(this.$el, arguments);
     },
 
     render: function () {
