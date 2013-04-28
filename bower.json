@@ -1,7 +1,7 @@
 {
   "name": "bobun-ui",
-  "description": "UI library using Backbone and Bootstrap.",
-  "version": "0.2.2",
+  "description": "Set of UI components based on Backbone Bobun.",
+  "version": "0.3.0",
   "author": "Bergé Greg <berge.greg@gmail.com>",
   "ignore": [
     ".gitignore",
@@ -12,13 +12,11 @@
     "test"
   ],
   "dependencies": {
-    "backbone.babysitter": "~0.0.5",
-    "bobun-binding": "~0.1.1"
+    "bobun": "~0.3.1"
   },
   "devDependencies": {
-    "backbone": "~1.0.0",
     "underscore": "~1.4.4",
-    "jquery": "~1.9.1",
+    "jquery": "~2.0.0",
     "font-awesome": "~3.0.2",
     "bootstrap": "~2.3.1"
   }

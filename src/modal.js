@@ -1,9 +1,11 @@
 (function () {
   'use strict';
 
-  var root = this;
+  var Backbone = this.Backbone,
+  Bobun = this.Bobun;
+  Bobun.UI = Bobun.UI || {};
 
-  root.Bobun.UI.Modal = root.Bobun.UI.Base.extend({
+  Bobun.UI.Modal = Bobun.View.extend({
 
     className: 'modal',
 
@@ -25,7 +27,7 @@
 
     initialize: function () {
       // header
-      this.options.headerView = this.get('headerView') || new root.Bobun.UI.Modal.Header({
+      this.options.headerView = this.get('headerView') || new Bobun.UI.Modal.Header({
         model: this.model,
         title: this.get('title')
       });
@@ -35,14 +37,14 @@
       this.views.add(this.get('headerView'));
 
       // body
-      this.options.bodyView = this.get('bodyView') || new root.Bobun.UI.Modal.Body({
+      this.options.bodyView = this.get('bodyView') || new Bobun.UI.Modal.Body({
         model: this.model
       });
 
       this.views.add(this.get('bodyView'));
 
       // footer
-      this.options.footerView = this.get('footerView') || new root.Bobun.UI.Modal.Footer({
+      this.options.footerView = this.get('footerView') || new Bobun.UI.Modal.Footer({
         model: this.model,
         views: this.get('buttons')
       });
@@ -65,7 +67,7 @@
     }
   });
 
-  root.Bobun.UI.Modal.Header = root.Bobun.UI.Base.extend({
+  Bobun.UI.Modal.Header = Bobun.View.extend({
 
     className: 'modal-header',
 
@@ -77,7 +79,7 @@
 
     initialize: function () {
       // close
-      this.options.closeView = this.get('closeView') || new root.Bobun.UI.Base({
+      this.options.closeView = this.get('closeView') || new Bobun.View({
         model: this.model,
         el: Backbone.$('<button>')
         .addClass('close')
@@ -88,7 +90,7 @@
       this.views.add(this.get('closeView'));
 
       // title
-      this.options.titleView = this.get('titleView') || new root.Bobun.UI.Modal.Header.Title({
+      this.options.titleView = this.get('titleView') || new Bobun.UI.Modal.Header.Title({
         model: this.model,
         title: this.get('title')
       });
@@ -105,7 +107,7 @@
     }
   });
 
-  root.Bobun.UI.Modal.Header.Title = root.Bobun.UI.Base.extend({
+  Bobun.UI.Modal.Header.Title = Bobun.View.extend({
 
     tagName: 'h3',
 
@@ -123,12 +125,12 @@
     }
   });
 
-  root.Bobun.UI.Modal.Body = root.Bobun.UI.Base.extend({
+  Bobun.UI.Modal.Body = Bobun.View.extend({
 
     className: 'modal-body'
   });
 
-  root.Bobun.UI.Modal.Footer = root.Bobun.UI.Base.extend({
+  Bobun.UI.Modal.Footer = Bobun.View.extend({
 
     className: 'modal-footer',
 

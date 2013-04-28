@@ -15,10 +15,9 @@ files = [
   'components/underscore/underscore.js',
   'components/backbone/backbone.js',
   'components/bootstrap/docs/assets/js/bootstrap.js',
-  'components/bobun-binding/src/bobun-binding.js',
   'components/backbone.babysitter/src/childviewcontainer.js',
+  'components/bobun/bobun.js',
 
-  'src/bobun-ui.js',
   'src/modal.js',
   'src/button.js',
   'src/icon-button.js',

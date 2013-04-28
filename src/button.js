@@ -1,16 +1,17 @@
 (function () {
   'use strict';
 
-  var root = this;
+  var Bobun = this.Bobun;
+  Bobun.UI = Bobun.UI || {};
 
-  root.Bobun.UI.Button = root.Bobun.UI.Base.extend({
+  Bobun.UI.Button = Bobun.View.extend({
 
     tagName: 'button',
 
     className: 'btn',
 
     events: {
-      'click': '_$trigger'
+      'click': 'domEventTriggerProxy'
     },
 
     options: {
@@ -21,7 +22,7 @@
 
     initialize: function () {
       // label
-      this.options.labelView = this.get('labelView') || new root.Bobun.UI.Button.Label({
+      this.options.labelView = this.get('labelView') || new Bobun.UI.Button.Label({
         model: this.model,
         label: this.get('label')
       });
@@ -45,7 +46,7 @@
     }
   });
 
-  root.Bobun.UI.Button.Label = root.Bobun.UI.Base.extend({
+  Bobun.UI.Button.Label = Bobun.View.extend({
 
     tagName: 'span',
 
@@ -62,4 +63,5 @@
       return this;
     }
   });
+
 }).call(this);

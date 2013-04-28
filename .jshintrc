@@ -53,14 +53,5 @@
   "browser": true,
   "jquery": true,
   "node": true,
-  "devel": true,
-
-  "globals": {
-    "requirejs": false,
-    "require": false,
-    "define": false,
-    "Backbone": false,
-    "_": false,
-    "Bobun": false
-  }
+  "devel": true
 }

@@ -1,14 +1,16 @@
 (function () {
   'use strict';
 
-  var root = this;
+  var Bobun = this.Bobun,
+  _ = this._;
+  Bobun.UI = Bobun.UI || {};
 
-  root.Bobun.UI.IconButton = root.Bobun.UI.Button.extend({
+  Bobun.UI.IconButton = Bobun.UI.Button.extend({
 
     className: 'btn btn-icon',
 
     initialize: function () {
-      root.Bobun.UI.Button.prototype.initialize.apply(this, arguments);
+      Bobun.UI.Button.prototype.initialize.apply(this, arguments);
 
       // options
       this.options = _.extend({
@@ -22,7 +24,7 @@
       this.bindTo(this, {'processing': 'disabled'});
 
       // icon
-      this.options.iconView = this.get('iconView') || new root.Bobun.UI.IconButton.Icon({
+      this.options.iconView = this.get('iconView') || new Bobun.UI.IconButton.Icon({
         model: this.model,
         processing: this.get('processing'),
         defaultClassName: this.get('defaultIconClassName'),
@@ -45,7 +47,7 @@
     }
   });
 
-  root.Bobun.UI.IconButton.Icon = root.Bobun.UI.Base.extend({
+  Bobun.UI.IconButton.Icon = Bobun.View.extend({
 
     tagName: 'i',
 
