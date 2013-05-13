@@ -1,7 +1,7 @@
 {
   "name": "bobun-ui",
   "description": "Set of UI components based on Backbone Bobun.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Bergé Greg <berge.greg@gmail.com>",
   "ignore": [
     ".gitignore",
