@@ -20,11 +20,11 @@ describe('Bobun.UI.Dropdown', function () {
 
       $('body').append(dropdownView.render().el);
 
-      expect($('.btn')).to.have.text('test');
+      expect(dropdownView.get('buttonView').$el).to.have.text('test');
 
       // set
       dropdownView.set('label', 'test2');
-      expect($('.btn')).to.have.text('test2');
+      expect(dropdownView.get('buttonView').$el).to.have.text('test2');
     });
 
     it('#buttonView', function () {
@@ -38,7 +38,7 @@ describe('Bobun.UI.Dropdown', function () {
 
       $('body').append(dropdownView.render().el);
 
-      expect($('.btn')).to.have.text('myCustomButton');
+      expect(dropdownView.get('buttonView').$el).to.have.text('myCustomButton');
     });
 
     it('#disabled', function () {
@@ -48,11 +48,11 @@ describe('Bobun.UI.Dropdown', function () {
 
       $('body').append(dropdownView.render().el);
 
-      expect($('.btn')).to.have.attr('disabled', 'disabled');
+      expect(dropdownView.get('buttonView').$el).to.have.attr('disabled', 'disabled');
 
       // set
       dropdownView.set('disabled', false);
-      expect($('.btn')).to.not.have.attr('disabled', 'disabled');
+      expect(dropdownView.get('buttonView').$el).to.not.have.attr('disabled', 'disabled');
     });
 
     describe('#choices', function () {

@@ -20,7 +20,7 @@ describe('Bobun.UI.Modal', function () {
 
       modalView.render().modal();
 
-      expect($('.modal .modal-header h3')).to.have.text('test');
+      expect(modalView.$el.find('.modal-header h3')).to.have.text('test');
     });
 
     it('#buttons', function () {
@@ -32,7 +32,7 @@ describe('Bobun.UI.Modal', function () {
 
       modalView.render().modal();
 
-      expect($('.modal .modal-footer div')).to.have.text('hello');
+      expect(modalView.$el.find('.modal-footer div')).to.have.text('hello');
     });
   });
 
@@ -40,10 +40,10 @@ describe('Bobun.UI.Modal', function () {
     it('should show the modal', function () {
       modalView.render().modal();
 
-      expect($('.modal')).to.exist;
-      expect($('.modal .modal-header')).to.exist;
-      expect($('.modal .modal-body')).to.exist;
-      expect($('.modal .modal-footer')).to.exist;
+      expect(modalView.$el).to.exist;
+      expect(modalView.$el.find('.modal-header')).to.exist;
+      expect(modalView.$el.find('.modal-body')).to.exist;
+      expect(modalView.$el.find('.modal-footer')).to.exist;
     });
   });
 
