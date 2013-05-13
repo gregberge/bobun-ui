@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bobun UI</title>
+    <link rel="stylesheet" type="text/css" href="../components/bootstrap/docs/assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../components/font-awesome/css/font-awesome.css">
+    <style type="text/css">
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 10px   0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <h3 class="muted">Bobun UI</h3>
+      </div>
+
+      <hr>
+
+      <div class="ui-button">
+        <h3>Button</h3>
+        <div class="example"></div>
+      </div>
+
+      <div class="ui-icon-button">
+        <h3>Icon Button</h3>
+        <div class="example"></div>
+      </div>
+
+      <div class="ui-icon-modal">
+        <h3>Modal</h3>
+        <div class="example">
+          <button class="btn">Launch modal</button>
+        </div>
+      </div>
+
+      <div class="ui-icon-dropdown">
+        <h3>Dropdown</h3>
+        <div class="example"></div>
+      </div>
+
+    </div>
+
+    <script src="../components/jquery/jquery.js"></script>
+    <script src="../components/underscore/underscore.js"></script>
+    <script src="../components/bootstrap/docs/assets/js/bootstrap.js"></script>
+    <script src="../components/backbone/backbone.js"></script>
+    <script src="../components/backbone.babysitter/lib/backbone.babysitter.js"></script>
+    <script src="../components/bobun/bobun.js"></script>
+    <script src="../src/button.js"></script>
+    <script src="../src/icon-button.js"></script>
+    <script src="../src/modal.js"></script>
+    <script src="../src/dropdown.js"></script>
+
+    <script>
+    // Button
+    var button = new Bobun.UI.Button({
+      label: 'My button'
+    });
+
+    $('.ui-button .example').append(button.render().el);
+
+    // Icon button
+    var iconButton = new Bobun.UI.IconButton({
+      label: 'My button',
+      defaultIconClassName: 'icon-twitter'
+    });
+
+    $('.ui-icon-button .example').append(iconButton.render().el);
+
+    // Modal
+    var modal = new Bobun.UI.Modal({
+      title: 'Title'
+    });
+
+    $('.ui-icon-modal .btn').on('click', function () {
+      modal.render().$el.modal();
+    });
+
+    // Dropdown
+    var dropdown = new Bobun.UI.Dropdown({
+      label: 'Test',
+      choices: [
+        {
+          label: 'Choice 1'
+        },
+        {
+          label: 'Choice 2'
+        }
+      ]
+    });
+
+    $('.ui-icon-dropdown .example').append(dropdown.render().el);
+
+    </script>
+  </body>
+</html>
