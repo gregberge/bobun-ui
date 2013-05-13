@@ -20,6 +20,7 @@ files = [
 
   'src/modal.js',
   'src/button.js',
+  'src/input.js',
   'src/icon-button.js',
   'src/dropdown.js',
 
