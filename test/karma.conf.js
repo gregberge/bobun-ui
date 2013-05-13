@@ -21,6 +21,7 @@ files = [
   'src/modal.js',
   'src/button.js',
   'src/icon-button.js',
+  'src/dropdown.js',
 
   {pattern: 'test/fixtures/**/*', included: false, watched: true, served: true},
   'test/unit/**/*'
