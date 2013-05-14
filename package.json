@@ -1,7 +1,7 @@
 {
   "name": "bobun-ui",
   "description": "Set of UI components based on Backbone Bobun.",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Bergé Greg <berge.greg@gmail.com>",
   "keywords": [
     "backbone",
