@@ -25,6 +25,10 @@ describe('Bobun.UI.Input', function () {
       // set
       inputView.set('value', 'test2');
       expect(inputView.$el).to.have.value('test2');
+
+      // set on element
+      inputView.$el.val('test3');
+      expect(inputView.$el).to.have.value('test3');
     });
 
     it('#disabled', function () {
@@ -63,7 +67,7 @@ describe('Bobun.UI.Input', function () {
       inputView.$el.trigger('keyup');
       inputView.$el.trigger('keypress');
 
-      expect(spy.callCount).to.equal(6);
+      expect(spy.callCount).to.equal(7);
     });
   });
 });

@@ -30,6 +30,7 @@
       // events
       this.on('change:disabled', this.updateDisabled);
       this.on('change:value', this.updateValue);
+      this.on('input', this.onInput);
     },
 
     render: function () {
@@ -46,6 +47,10 @@
     updateValue: function () {
       this.$el.val(this.get('value'));
       return this;
+    },
+
+    onInput: function () {
+      this.set('value', this.$el.val());
     }
   });
 
