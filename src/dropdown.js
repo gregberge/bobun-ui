@@ -81,7 +81,7 @@
 
     listenChoices: function () {
       _.each(this.get('choices'), function (choice) {
-        choice.on('click', function () {
+        choice.on('$click', function () {
           this.trigger.apply(this, ['click:choice'].concat([].slice.call(arguments)));
         }, this);
       }, this);

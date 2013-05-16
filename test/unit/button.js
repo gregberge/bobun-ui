@@ -47,7 +47,7 @@ describe('Bobun.UI.Button', function () {
     it('#click', function () {
       var spy = sinon.spy();
 
-      buttonView.on('click', spy);
+      buttonView.on('$click', spy);
 
       $('body').append(buttonView.render().el);
 

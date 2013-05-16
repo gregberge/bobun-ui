@@ -97,7 +97,7 @@ describe('Bobun.UI.IconButton', function () {
     it('#click', function () {
       var spy = sinon.spy();
 
-      iconButtonView.on('click', spy);
+      iconButtonView.on('$click', spy);
 
       $('body').append(iconButtonView.render().el);
 

@@ -51,12 +51,12 @@ describe('Bobun.UI.Input', function () {
     it('#click, #change, #input, #keydown, #keyup, #keypress', function () {
       var spy = sinon.spy();
 
-      inputView.on('click', spy);
-      inputView.on('change', spy);
-      inputView.on('input', spy);
-      inputView.on('keydown', spy);
-      inputView.on('keyup', spy);
-      inputView.on('keypress', spy);
+      inputView.on('$click', spy);
+      inputView.on('$change', spy);
+      inputView.on('$input', spy);
+      inputView.on('$keydown', spy);
+      inputView.on('$keyup', spy);
+      inputView.on('$keypress', spy);
 
       $('body').append(inputView.render().el);
 
@@ -67,7 +67,7 @@ describe('Bobun.UI.Input', function () {
       inputView.$el.trigger('keyup');
       inputView.$el.trigger('keypress');
 
-      expect(spy.callCount).to.equal(7);
+      expect(spy.callCount).to.equal(6);
     });
   });
 });
