@@ -23,6 +23,7 @@ files = [
   'src/input.js',
   'src/icon-button.js',
   'src/dropdown.js',
+  'src/label.js',
 
   {pattern: 'test/fixtures/**/*', included: false, watched: true, served: true},
   'test/unit/**/*'
