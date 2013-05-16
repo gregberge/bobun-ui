@@ -1,4 +1,4 @@
-/*! bobun-ui - v0.3.3 - https://github.com/neoziro/bobun-ui */
+/*! bobun-ui - v0.4.0 - https://github.com/neoziro/bobun-ui */
 (function () {
   'use strict';
 
@@ -149,7 +149,7 @@
 
     listenChoices: function () {
       _.each(this.get('choices'), function (choice) {
-        choice.on('click', function () {
+        choice.on('$click', function () {
           this.trigger.apply(this, ['click:choice'].concat([].slice.call(arguments)));
         }, this);
       }, this);
