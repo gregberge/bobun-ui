@@ -57,6 +57,11 @@
         <div class="example"></div>
       </div>
 
+      <div class="ui-icon-select">
+        <h3>Select</h3>
+        <div class="example"></div>
+      </div>
+
     </div>
 
     <script src="../components/jquery/jquery.js"></script>
@@ -71,6 +76,7 @@
     <script src="../src/dropdown.js"></script>
     <script src="../src/input.js"></script>
     <script src="../src/label.js"></script>
+    <script src="../src/select.js"></script>
 
     <script>
     // Button
@@ -125,6 +131,13 @@
     });
 
     $('.ui-icon-label .example').append(label.render().el);
+
+    // Select
+    var select = new Bobun.UI.Select({
+      choices: ['test1', 'test2']
+    });
+
+    $('.ui-icon-select .example').append(select.render().el);
 
     </script>
   </body>

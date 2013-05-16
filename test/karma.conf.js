@@ -24,6 +24,7 @@ files = [
   'src/icon-button.js',
   'src/dropdown.js',
   'src/label.js',
+  'src/select.js',
 
   {pattern: 'test/fixtures/**/*', included: false, watched: true, served: true},
   'test/unit/**/*'
