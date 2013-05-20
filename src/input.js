@@ -30,7 +30,7 @@
       // events
       this.on('change:disabled', this.updateDisabled);
       this.on('change:value', this.updateValue);
-      this.on('input', this.onInput);
+      this.on('$input', this.onInput);
     },
 
     render: function () {
