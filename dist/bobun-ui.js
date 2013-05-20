@@ -1,4 +1,4 @@
-/*! bobun-ui - v0.4.0 - https://github.com/neoziro/bobun-ui */
+/*! bobun-ui - v0.4.2 - https://github.com/neoziro/bobun-ui */
 (function () {
   'use strict';
 
@@ -308,7 +308,7 @@
       // events
       this.on('change:disabled', this.updateDisabled);
       this.on('change:value', this.updateValue);
-      this.on('input', this.onInput);
+      this.on('$input', this.onInput);
     },
 
     render: function () {
