@@ -291,12 +291,18 @@
     },
 
     events: {
-      'click'   : 'domEventTriggerProxy',
-      'change'  : 'domEventTriggerProxy',
-      'input'   : 'domEventTriggerProxy',
-      'keydown' : 'domEventTriggerProxy',
-      'keyup'   : 'domEventTriggerProxy',
-      'keypress': 'domEventTriggerProxy'
+      'click'    : 'domEventTriggerProxy',
+      'change'   : 'domEventTriggerProxy',
+      'input'    : 'domEventTriggerProxy',
+      'keydown'  : 'domEventTriggerProxy',
+      'keyup'    : 'domEventTriggerProxy',
+      'keypress' : 'domEventTriggerProxy',
+      'dragstart': 'domEventTriggerProxy',
+      'dragenter': 'domEventTriggerProxy',
+      'dragover' : 'domEventTriggerProxy',
+      'dragleave': 'domEventTriggerProxy',
+      'dragend'  : 'domEventTriggerProxy',
+      'drop'     : 'domEventTriggerProxy'
     },
 
     options: {
