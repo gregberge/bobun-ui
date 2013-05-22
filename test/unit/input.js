@@ -47,27 +47,21 @@ describe('Bobun.UI.Input', function () {
   });
 
   describe('#events', function () {
+    var events = [
+      'click', 'change', 'input', 'keydown', 'keyup', 'keypress', 'dragstart',
+      'dragenter', 'dragover', 'dragleave', 'dragend', 'drop'
+    ];
 
-    it('#click, #change, #input, #keydown, #keyup, #keypress', function () {
+    it(_.map(events, function (event) { return '#' + event; }).join(', '), function () {
       var spy = sinon.spy();
 
-      input.on('$click', spy);
-      input.on('$change', spy);
-      input.on('$input', spy);
-      input.on('$keydown', spy);
-      input.on('$keyup', spy);
-      input.on('$keypress', spy);
+      _.each(events, function (event) { input.on('$' + event, spy); });
 
       $('body').append(input.render().el);
 
-      input.$el.trigger('click');
-      input.$el.trigger('change');
-      input.$el.trigger('input');
-      input.$el.trigger('keydown');
-      input.$el.trigger('keyup');
-      input.$el.trigger('keypress');
+      _.each(events, _.bind(input.$el.trigger, input.$el));
 
-      expect(spy.callCount).to.equal(6);
+      expect(spy.callCount).to.equal(events.length);
     });
   });
 });
