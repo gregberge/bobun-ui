@@ -135,7 +135,9 @@
     className: 'modal-footer',
 
     render: function () {
-      this.views.each(this.append, this);
+      this.views.each(function (view) {
+         this.append(view);
+      }, this);
       return this;
     }
   });
