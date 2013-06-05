@@ -1,4 +1,4 @@
-/*! bobun-ui - v0.4.2 - https://github.com/neoziro/bobun-ui */
+/*! bobun-ui - v0.4.4 - https://github.com/neoziro/bobun-ui */
 (function () {
   'use strict';
 
@@ -505,12 +505,15 @@
     className: 'modal-footer',
 
     render: function () {
-      this.views.each(this.append, this);
+      this.views.each(function (view) {
+        this.append(view);
+      }, this);
       return this;
     }
   });
 
 }).call(this);
+
 (function () {
   'use strict';
 

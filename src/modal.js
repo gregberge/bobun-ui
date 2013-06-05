@@ -136,7 +136,7 @@
 
     render: function () {
       this.views.each(function (view) {
-         this.append(view);
+        this.append(view);
       }, this);
       return this;
     }
