@@ -1,5 +1,7 @@
 # Bobun UI [![Build Status](https://travis-ci.org/neoziro/bobun-ui.png?branch=master)](https://travis-ci.org/neoziro/bobun-ui)
 
+# This plugin is no longer actively maintained, you can still use it but issues will not be resolved. If you want the npm name, you can contact me by email.
+
 Set of UI components based on [Bobun](https://github.com/neoziro/bobun).
 
 ## Components
